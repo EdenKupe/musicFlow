@@ -10,7 +10,7 @@
 	if (keyCode == '13'){
       // Enter pressed
 				(async () => {
-			    const res = await fetch('http://ws.audioscrobbler.com/2.0/?method=album.search&album=' + name + '&api_key=ab0eaf7766018b2268b45604e0b2e15f&format=json&limit=20');
+			    const res = await fetch('https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + name + '&api_key=ab0eaf7766018b2268b45604e0b2e15f&format=json&limit=20');
 			    retrievedAlbums = (await res.json()).results.albummatches.album;
 			    console.log(retrievedAlbums)
 			  })();
