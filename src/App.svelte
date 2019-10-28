@@ -1,6 +1,5 @@
 <script>
-	import Grid from './Grid.svelte'
-
+	import Grid from './Grid.svelte';
 </script>
 
 <Grid title='musicFlow'/>
