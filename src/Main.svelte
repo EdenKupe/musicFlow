@@ -64,13 +64,23 @@ function addAlbum(album, selected) {
 </div>
 <div id="flowMainArea">
   <div id="selectedAlbums">
-    {#each retrievedAlbums.filter(t => t.selected) as album (album.name)}
-    <li in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><img alt="{album.name}" src="{album.image[2]['#text']}" /> {album.name} </li>
+  <ul id="selectedList">
+    {#each retrievedAlbums.filter(t => t.selected) as album, i (album.name)}
+    <li id="selectedAlbum" class="item{i}" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><img alt="{album.name}" src="{album.image[2]['#text']}" /> {album.name} </li>
     {/each}
+  </ul>
   </div>
 </div>
 
 <style>
+
+ul {
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
 #flowSidebar {
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
@@ -87,16 +97,28 @@ function addAlbum(album, selected) {
   background-color: #333333;
 }
 
-ul {
+#albumList {
   display: flex;
   flex-wrap: wrap;
-  list-style: none;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  padding-inline-start: 0;
 }
 
-ul li {
+#selectedAlbums {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#selectedList {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 174px 174px 174px;
+  grid-template-rows: 174px 174px 174px;
+  grid-gap: 20px;
+  list-style: none;
+  flex-direction: column;
+}
+
+#albumList li {
   text-align: left;
   flex: 1;
   font-size: 12px;
@@ -108,4 +130,30 @@ ul li {
 .searchText {
   color: #666A86;
 }
+
+.item0 {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.item1 {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.item2 {
+  grid-row: 2;
+  grid-column: 3;
+}
+
+.item3 {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.item4 {
+  grid-row: 3;
+  grid-column: 2;
+}
+
 </style>
