@@ -12,7 +12,7 @@ The app is pretty simple: the `Grid` component contains the HTML structure of th
 
 ### `flowMainArea`
 
-When an image is clicked, its corresponding object receives the `selected: true` key/value pair. `flowMainArea` also has an `each` loop but this one only looks for objects with `selected` set to `true`. Again becaus of the way Svelete works, whenever an object gets updated, the `each` loop does as well, resulting in the image being moved to `flowMainArea`.
+When an image is clicked, its corresponding object receives the `selected: true` key/value pair. `flowMainArea` also has an `each` loop but this one only looks for objects with `selected` set to `true`. Again because of the way Svelete works, whenever an object gets updated, the `each` loop does as well, resulting in the image being moved to `flowMainArea`.
 
 **Note**: right now, `flowMainArea` is tied to the same array as `flowSidebar`. Because of that, whenever you perform a new search (effectively clearing the array), whatever work you did in `flowMainArea` will get reset as well. Down the line, I plan to decouple these elements.
 
@@ -23,6 +23,8 @@ You'll note that when an image is moved from `flowSidebar` to `flowMainArea`, it
 ## Todo
 
 Mostly writing this down for keeping myself honest but if someone out there (hello!) wants to take any of these tasks and contribute, please feel free to open a Pull Request!
+
+* Finish the damn UI! It doesn't do anything right now except create a grid, add those fancy arrows!
 
 * Decouple `flowSidebar` and `flowMainArea` to allow for more intricate flow charts (cross-band for example).
 
