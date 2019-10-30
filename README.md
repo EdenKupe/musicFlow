@@ -6,7 +6,7 @@ musicFlow is a web-app built with Svelte and designed to make it easier to make 
 
 The app is pretty simple: the `Grid` component contains the HTML structure of the app (using CSS Grid) and also loads the `Main` component. This component is made up of two pieces: the `flowSidebar` div and the `flowMainArea` div.
 
-### flowSidebar
+### `flowSidebar`
 
 `flowSidebar` contains a search input. Upon submitted input, it calls the [last.fm API](https://www.last.fm/api/) with the query to search for albums. It then displays all the JSON objects retrieved using Svelte's `each` loop. Because of the way Svelte works, whenever the array of results gets updated (`retrievedAlbums`), the `each` loop updates as well, making sure you see the latest results. However, every time you search, the array will get cleared since the whole idea of the flow chart (for now) is to focus on one band's discography. Images are displayed by filling in the retrieved object's image property into an `<img>` element.
 
