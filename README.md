@@ -33,3 +33,5 @@ Mostly writing this down for keeping myself honest but if someone out there (hel
 * Do a better job of cleaning up the response from last.fm (remove duplicates, stop ignoring `null` and do something with, etc).
 
 * Design a proper UI instead of the placeholder colors/title that's there right now.
+
+* Get a proper domain.
