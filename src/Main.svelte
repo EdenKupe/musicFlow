@@ -42,7 +42,7 @@ function remove(album) {
 	}
 
 function addAlbum(album, selected) {
-  album.selected = selected
+  album.selected = selected;
   remove(album);
   retrievedAlbums = retrievedAlbums.concat(album);
   console.log(album);
@@ -66,7 +66,7 @@ function addAlbum(album, selected) {
   <div id="selectedAlbums">
   <ul id="selectedList">
     {#each retrievedAlbums.filter(t => t.selected) as album, i (album.name)}
-    <li class="item{i} selectedAlbum" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><span><img alt="{album.name}" src="{album.image[2]['#text']}" /><span>{album.name}</span></span></li>
+    <li class="item{i} selectedAlbum" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><span class="arrowContainer"><img alt="arrow" src="images/arrowBase.svg" /></span><span class="coverContainer"><span>{album.name}</span><img alt="{album.name}" src="{album.image[2]['#text']}" /></span></li>
     {/each}
   </ul>
   </div>
@@ -136,14 +136,20 @@ ul {
   display: flex;
 }
 
-.selectedAlbum::before {
-  content: url(images/arrowBase.svg);
-  display: block;
-  transform: rotate(180deg);
-  margin-top: 20px;
-  align-self: center;
-  margin-left: -140px;
-  margin-right: 10px;
+.coverContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.coverContainer span {
+  position: absolute;
+  color: #fff;
+}
+
+.arrowContainer {
+  display: flex;
+  margin-left: -130px;
+  margin-right: 20px;
 }
 
 .item0 {
@@ -151,13 +157,21 @@ ul {
   grid-column: 1;
 }
 
-.item0::before {
+.item0 .arrowContainer {
   display: none;
 }
+
+/* .item0::before {
+  display: none;
+} */
 
 .item1 {
   grid-row: 1;
   grid-column: 2;
+}
+
+.item1 .arrowContainer {
+  transform: rotate(180deg);
 }
 
 .item2 {
@@ -166,10 +180,10 @@ ul {
   grid-column: 1;
 }
 
-.item2::before {
+.item2 .arrowContainer {
   transform: rotate(270deg);
-  margin-top: -110px;
-  margin-bottom: 40px;
+  margin-top: -130px;
+  margin-bottom: 60px;
   margin-right: 0px;
   margin-left: 0px;
 }
@@ -179,18 +193,41 @@ ul {
   grid-column: 3;
 }
 
+.item3 .arrowContainer {
+  transform: rotate(180deg);
+  margin-left: -100px;
+}
+
 .item4 {
   flex-direction: column;
   grid-row: 3;
   grid-column: 1;
 }
 
-.item4::before {
+.item4 .arrowContainer {
   transform: rotate(270deg);
-  margin-top: -110px;
-  margin-bottom: 40px;
+  margin-top: -130px;
+  margin-bottom: 60px;
   margin-right: 0px;
   margin-left: 0px;
+}
+
+.item5 .arrowContainer {
+  transform: rotate(180deg);
+}
+
+.item6 .arrowContainer {
+  transform: rotate(180deg);
+  margin-left: -100px;
+}
+
+.item7 .arrowContainer {
+  transform: rotate(180deg);
+}
+
+.item8 .arrowContainer {
+  transform: rotate(180deg);
+  margin-left: -100px;
 }
 
 </style>
