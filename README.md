@@ -24,7 +24,7 @@ You'll note that when an image is moved from `flowSidebar` to `flowMainArea`, it
 
 Mostly writing this down for keeping myself honest but if someone out there (hello!) wants to take any of these tasks and contribute, please feel free to open a Pull Request!
 
-* Finish the damn UI! It doesn't do anything right now except create a grid, add those fancy arrows!
+* Finish the damn UI! We've got arrows now but we still need text boxes to explain what they mean.
 
 * Decouple `flowSidebar` and `flowMainArea` to allow for more intricate flow charts (cross-band for example).
 
