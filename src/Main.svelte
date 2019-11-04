@@ -57,7 +57,7 @@ function addAlbum(album, selected) {
     <li></li>
   {:else}
     {#each retrievedAlbums.filter(t => !t.selected && t.name != '(null)') as album (album.name)}
-        <li in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, true)}><img alt="{album.name}" src="{album.image[2]['#text']}" /> {album.name} </li>
+        <li in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, true)}><img alt="{album.name}" src="{album.image[2]['#text']}" /><span>{album.name}</span></li>
     {/each}
   {/if}
 </ul>
@@ -66,7 +66,7 @@ function addAlbum(album, selected) {
   <div id="selectedAlbums">
   <ul id="selectedList">
     {#each retrievedAlbums.filter(t => t.selected) as album, i (album.name)}
-    <li id="selectedAlbum" class="item{i}" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><img alt="{album.name}" src="{album.image[2]['#text']}" /> {album.name} </li>
+    <li class="item{i} selectedAlbum" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><span><img alt="{album.name}" src="{album.image[2]['#text']}" /><span>{album.name}</span></span></li>
     {/each}
   </ul>
   </div>
@@ -105,7 +105,7 @@ ul {
 #selectedAlbums {
   height: 100%;
   display: flex;
-  justify-content: center;
+  padding-left: 70px;
 }
 
 #selectedList {
@@ -113,9 +113,10 @@ ul {
   display: grid;
   grid-template-columns: 174px 174px 174px;
   grid-template-rows: 174px 174px 174px;
-  grid-gap: 20px;
+  grid-gap: 150px;
   list-style: none;
   flex-direction: column;
+  margin-top: 120px;
 }
 
 #albumList li {
@@ -131,9 +132,27 @@ ul {
   color: #666A86;
 }
 
+.selectedAlbum {
+  display: flex;
+}
+
+.selectedAlbum::before {
+  content: url(images/arrowBase.svg);
+  display: block;
+  transform: rotate(180deg);
+  margin-top: 20px;
+  align-self: center;
+  margin-left: -140px;
+  margin-right: 10px;
+}
+
 .item0 {
-  grid-row: 2;
-  grid-column: 2;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.item0::before {
+  display: none;
 }
 
 .item1 {
@@ -142,18 +161,36 @@ ul {
 }
 
 .item2 {
-  grid-row: 2;
-  grid-column: 3;
-}
-
-.item3 {
+  flex-direction: column;
   grid-row: 2;
   grid-column: 1;
 }
 
+.item2::before {
+  transform: rotate(270deg);
+  margin-top: -110px;
+  margin-bottom: 40px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.item3 {
+  grid-row: 1;
+  grid-column: 3;
+}
+
 .item4 {
+  flex-direction: column;
   grid-row: 3;
-  grid-column: 2;
+  grid-column: 1;
+}
+
+.item4::before {
+  transform: rotate(270deg);
+  margin-top: -110px;
+  margin-bottom: 40px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 </style>
