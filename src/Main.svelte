@@ -1,26 +1,5 @@
 <script>
-import { fade } from 'svelte/transition';
-import { quintOut } from 'svelte/easing';
-import { crossfade } from 'svelte/transition';
-import { flip } from 'svelte/animate';
-
-const [send, receive] = crossfade({
-  duration: d => Math.sqrt(d * 200),
-
-  fallback(node, params) {
-    const style = getComputedStyle(node);
-    const transform = style.transform === 'none' ? '' : style.transform;
-
-    return {
-      duration: 400,
-      easing: quintOut,
-      css: t => `
-        transform: ${transform} scale(${t});
-        opacity: ${t}
-      `
-    };
-  }
-});
+import Album from './Album.svelte'
 let name;
 export let retrievedAlbums = [];
 function searchAlbum(e) {
@@ -36,37 +15,21 @@ function searchAlbum(e) {
         })();
     }
 }
-
-function remove(album) {
-		retrievedAlbums = retrievedAlbums.filter(t => t !== album);
-	}
-
-function addAlbum(album, selected) {
-  album.selected = selected;
-  remove(album);
-  retrievedAlbums = retrievedAlbums.concat(album);
-  console.log(album);
-}
-
 </script>
 
 <div id="flowSidebar">
 <input on:keydown={searchAlbum} bind:value={name} placeholder="Search for albums">
 <ul id="albumList">
-  {#if !name}
-    <li></li>
-  {:else}
     {#each retrievedAlbums.filter(t => !t.selected && t.name != '(null)') as album (album.name)}
-        <li in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, true)}><img alt="{album.name}" src="{album.image[2]['#text']}" /><span>{album.name}</span></li>
+      <Album object={album} toggle=true className='poolItem' arrowClass='arrowContainer' albumName={album.name} albumImage={album.image[2]["#text"]}/>
     {/each}
-  {/if}
 </ul>
 </div>
 <div id="flowMainArea">
   <div id="selectedAlbums">
   <ul id="selectedList">
     {#each retrievedAlbums.filter(t => t.selected) as album, i (album.name)}
-    <li class="item{i} selectedAlbum" in:receive="{{key: album.name}}" out:send="{{key: album.name}}" on:click={() => addAlbum(album, false)} ><span class="arrowContainer"><img alt="arrow" src="images/arrowBase.svg" /></span><span class="coverContainer"><span>{album.name}</span><img alt="{album.name}" src="{album.image[2]['#text']}" /></span></li>
+    <Album object={album} toggle=false className="item + {i}" arrowClass='arrowContainer' albumName={album.name} albumImage={album.image[2]["#text"]}/>
     {/each}
   </ul>
   </div>
@@ -130,104 +93,6 @@ ul {
 
 .searchText {
   color: #666A86;
-}
-
-.selectedAlbum {
-  display: flex;
-}
-
-.coverContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.coverContainer span {
-  position: absolute;
-  color: #fff;
-}
-
-.arrowContainer {
-  display: flex;
-  margin-left: -130px;
-  margin-right: 20px;
-}
-
-.item0 {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.item0 .arrowContainer {
-  display: none;
-}
-
-/* .item0::before {
-  display: none;
-} */
-
-.item1 {
-  grid-row: 1;
-  grid-column: 2;
-}
-
-.item1 .arrowContainer {
-  transform: rotate(180deg);
-}
-
-.item2 {
-  flex-direction: column;
-  grid-row: 2;
-  grid-column: 1;
-}
-
-.item2 .arrowContainer {
-  transform: rotate(270deg);
-  margin-top: -130px;
-  margin-bottom: 60px;
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-.item3 {
-  grid-row: 1;
-  grid-column: 3;
-}
-
-.item3 .arrowContainer {
-  transform: rotate(180deg);
-  margin-left: -100px;
-}
-
-.item4 {
-  flex-direction: column;
-  grid-row: 3;
-  grid-column: 1;
-}
-
-.item4 .arrowContainer {
-  transform: rotate(270deg);
-  margin-top: -130px;
-  margin-bottom: 60px;
-  margin-right: 0px;
-  margin-left: 0px;
-}
-
-.item5 .arrowContainer {
-  transform: rotate(180deg);
-}
-
-.item6 .arrowContainer {
-  transform: rotate(180deg);
-  margin-left: -100px;
-}
-
-.item7 .arrowContainer {
-  transform: rotate(180deg);
-}
-
-.item8 .arrowContainer {
-  transform: rotate(180deg);
-  margin-left: -100px;
 }
 
 </style>
